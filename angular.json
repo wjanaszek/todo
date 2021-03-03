@@ -142,6 +142,156 @@
           }
         }
       }
+    },
+    "task-ui": {
+      "projectType": "library",
+      "root": "libs/task/ui",
+      "sourceRoot": "libs/task/ui/src",
+      "prefix": "janaszek",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/task/ui/src/**/*.ts",
+              "libs/task/ui/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/task/ui"],
+          "options": {
+            "jestConfig": "libs/task/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "task-feature": {
+      "projectType": "library",
+      "root": "libs/task/feature",
+      "sourceRoot": "libs/task/feature/src",
+      "prefix": "janaszek",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/task/feature/src/**/*.ts",
+              "libs/task/feature/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/task/feature"],
+          "options": {
+            "jestConfig": "libs/task/feature/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "task-application": {
+      "projectType": "library",
+      "root": "libs/task/application",
+      "sourceRoot": "libs/task/application/src",
+      "prefix": "janaszek",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/task/application/src/**/*.ts",
+              "libs/task/application/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/task/application"],
+          "options": {
+            "jestConfig": "libs/task/application/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "task-domain": {
+      "projectType": "library",
+      "root": "libs/task/domain",
+      "sourceRoot": "libs/task/domain/src",
+      "prefix": "janaszek",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/task/domain/src/**/*.ts",
+              "libs/task/domain/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/task/domain"],
+          "options": {
+            "jestConfig": "libs/task/domain/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "task-infrastructure": {
+      "projectType": "library",
+      "root": "libs/task/infrastructure",
+      "sourceRoot": "libs/task/infrastructure/src",
+      "prefix": "janaszek",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/task/infrastructure/src/**/*.ts",
+              "libs/task/infrastructure/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/task/infrastructure"],
+          "options": {
+            "jestConfig": "libs/task/infrastructure/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "util-domain": {
+      "projectType": "library",
+      "root": "libs/util/domain",
+      "sourceRoot": "libs/util/domain/src",
+      "prefix": "janaszek",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/util/domain/src/**/*.ts",
+              "libs/util/domain/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/util/domain"],
+          "options": {
+            "jestConfig": "libs/util/domain/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }
