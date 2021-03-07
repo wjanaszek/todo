@@ -1,28 +1,27 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2017", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@janaszek/task/ui": ["libs/task/ui/src/index.ts"],
-      "@janaszek/task/feature": ["libs/task/feature/src/index.ts"],
-      "@janaszek/task/application": ["libs/task/application/src/index.ts"],
-      "@janaszek/task/domain": ["libs/task/domain/src/index.ts"],
-      "@janaszek/task/infrastructure": [
-        "libs/task/infrastructure/src/index.ts"
-      ]
-    }
-  },
-  "exclude": ["node_modules", "tmp"]
+    "compileOnSave": false,
+    "compilerOptions": {
+        "rootDir": ".",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "target": "es2015",
+        "module": "esnext",
+        "lib": ["es2017", "dom"],
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "@janaszek/task/ui": ["libs/task/ui/src/index.ts"],
+            "@janaszek/task/feature": ["libs/task/feature/src/index.ts"],
+            "@janaszek/task/application": ["libs/task/application/src/index.ts"],
+            "@janaszek/task/domain": ["libs/task/domain/src/index.ts"],
+            "@janaszek/task/infrastructure": ["libs/task/infrastructure/src/index.ts"],
+            "@janaszek/util/ui/message": ["libs/util/ui/message/src/index.ts"]
+        }
+    },
+    "exclude": ["node_modules", "tmp"]
 }

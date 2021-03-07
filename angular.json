@@ -1,272 +1,294 @@
 {
-  "version": 1,
-  "cli": {
-    "defaultCollection": "@nrwl/angular"
-  },
-  "defaultProject": "todo",
-  "schematics": {
-    "@nrwl/angular": {
-      "application": {
-        "linter": "eslint"
-      },
-      "library": {
-        "linter": "eslint"
-      },
-      "storybook-configuration": {
-        "linter": "eslint"
-      }
+    "version": 1,
+    "cli": {
+        "defaultCollection": "@nrwl/angular"
     },
-    "@nrwl/angular:application": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
+    "defaultProject": "todo",
+    "schematics": {
+        "@nrwl/angular": {
+            "application": {
+                "linter": "eslint"
+            },
+            "library": {
+                "linter": "eslint"
+            },
+            "storybook-configuration": {
+                "linter": "eslint"
+            }
+        },
+        "@nrwl/angular:application": {
+            "style": "scss",
+            "linter": "eslint",
+            "unitTestRunner": "jest",
+            "e2eTestRunner": "cypress"
+        },
+        "@nrwl/angular:library": {
+            "style": "scss",
+            "linter": "eslint",
+            "unitTestRunner": "jest"
+        },
+        "@nrwl/angular:component": {
+            "style": "scss"
+        }
     },
-    "@nrwl/angular:library": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest"
-    },
-    "@nrwl/angular:component": {
-      "style": "scss"
-    }
-  },
-  "projects": {
-    "todo": {
-      "projectType": "application",
-      "root": "apps/todo",
-      "sourceRoot": "apps/todo/src",
-      "prefix": "janaszek",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "dist/apps/todo",
-            "index": "apps/todo/src/index.html",
-            "main": "apps/todo/src/main.ts",
-            "polyfills": "apps/todo/src/polyfills.ts",
-            "tsConfig": "apps/todo/tsconfig.app.json",
-            "aot": true,
-            "assets": ["apps/todo/src/favicon.ico", "apps/todo/src/assets"],
-            "styles": ["apps/todo/src/styles.scss"],
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "apps/todo/src/environments/environment.ts",
-                  "with": "apps/todo/src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+    "projects": {
+        "todo": {
+            "projectType": "application",
+            "root": "apps/todo",
+            "sourceRoot": "apps/todo/src",
+            "prefix": "janaszek",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/apps/todo",
+                        "index": "apps/todo/src/index.html",
+                        "main": "apps/todo/src/main.ts",
+                        "polyfills": "apps/todo/src/polyfills.ts",
+                        "tsConfig": "apps/todo/tsconfig.app.json",
+                        "aot": true,
+                        "assets": ["apps/todo/src/favicon.ico", "apps/todo/src/assets"],
+                        "styles": ["apps/todo/src/styles.scss"],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/todo/src/environments/environment.ts",
+                                    "with": "apps/todo/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "5mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
+                        }
+                    }
                 },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb",
-                  "maximumError": "10kb"
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "todo:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "todo:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "todo:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/todo/src/**/*.ts", "apps/todo/src/**/*.html"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/apps/todo"],
+                    "options": {
+                        "jestConfig": "apps/todo/jest.config.js",
+                        "passWithNoTests": true
+                    }
                 }
-              ]
             }
-          }
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "todo:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "todo:build:production"
+        "todo-e2e": {
+            "root": "apps/todo-e2e",
+            "sourceRoot": "apps/todo-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/todo-e2e/cypress.json",
+                        "tsConfig": "apps/todo-e2e/tsconfig.e2e.json",
+                        "devServerTarget": "todo:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "todo:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": ["apps/todo-e2e/**/*.{js,ts}"]
+                    }
+                }
             }
-          }
         },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "todo:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/todo/src/**/*.ts",
-              "apps/todo/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/todo"],
-          "options": {
-            "jestConfig": "apps/todo/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "todo-e2e": {
-      "root": "apps/todo-e2e",
-      "sourceRoot": "apps/todo-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/todo-e2e/cypress.json",
-            "tsConfig": "apps/todo-e2e/tsconfig.e2e.json",
-            "devServerTarget": "todo:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "todo:serve:production"
+        "task-ui": {
+            "projectType": "library",
+            "root": "libs/task/ui",
+            "sourceRoot": "libs/task/ui/src",
+            "prefix": "janaszek",
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/task/ui/src/**/*.ts",
+                            "libs/task/ui/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/task/ui"],
+                    "options": {
+                        "jestConfig": "libs/task/ui/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
             }
-          }
         },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/todo-e2e/**/*.{js,ts}"]
-          }
-        }
-      }
-    },
-    "task-ui": {
-      "projectType": "library",
-      "root": "libs/task/ui",
-      "sourceRoot": "libs/task/ui/src",
-      "prefix": "janaszek",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/task/ui/src/**/*.ts",
-              "libs/task/ui/src/**/*.html"
-            ]
-          }
+        "task-feature": {
+            "projectType": "library",
+            "root": "libs/task/feature",
+            "sourceRoot": "libs/task/feature/src",
+            "prefix": "janaszek",
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/task/feature/src/**/*.ts",
+                            "libs/task/feature/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/task/feature"],
+                    "options": {
+                        "jestConfig": "libs/task/feature/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
         },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/task/ui"],
-          "options": {
-            "jestConfig": "libs/task/ui/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "task-feature": {
-      "projectType": "library",
-      "root": "libs/task/feature",
-      "sourceRoot": "libs/task/feature/src",
-      "prefix": "janaszek",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/task/feature/src/**/*.ts",
-              "libs/task/feature/src/**/*.html"
-            ]
-          }
+        "task-application": {
+            "projectType": "library",
+            "root": "libs/task/application",
+            "sourceRoot": "libs/task/application/src",
+            "prefix": "janaszek",
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/task/application/src/**/*.ts",
+                            "libs/task/application/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/task/application"],
+                    "options": {
+                        "jestConfig": "libs/task/application/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
         },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/task/feature"],
-          "options": {
-            "jestConfig": "libs/task/feature/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "task-application": {
-      "projectType": "library",
-      "root": "libs/task/application",
-      "sourceRoot": "libs/task/application/src",
-      "prefix": "janaszek",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/task/application/src/**/*.ts",
-              "libs/task/application/src/**/*.html"
-            ]
-          }
+        "task-domain": {
+            "projectType": "library",
+            "root": "libs/task/domain",
+            "sourceRoot": "libs/task/domain/src",
+            "prefix": "janaszek",
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/task/domain/src/**/*.ts",
+                            "libs/task/domain/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/task/domain"],
+                    "options": {
+                        "jestConfig": "libs/task/domain/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
         },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/task/application"],
-          "options": {
-            "jestConfig": "libs/task/application/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "task-domain": {
-      "projectType": "library",
-      "root": "libs/task/domain",
-      "sourceRoot": "libs/task/domain/src",
-      "prefix": "janaszek",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/task/domain/src/**/*.ts",
-              "libs/task/domain/src/**/*.html"
-            ]
-          }
+        "task-infrastructure": {
+            "projectType": "library",
+            "root": "libs/task/infrastructure",
+            "sourceRoot": "libs/task/infrastructure/src",
+            "prefix": "janaszek",
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/task/infrastructure/src/**/*.ts",
+                            "libs/task/infrastructure/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/task/infrastructure"],
+                    "options": {
+                        "jestConfig": "libs/task/infrastructure/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
         },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/task/domain"],
-          "options": {
-            "jestConfig": "libs/task/domain/jest.config.js",
-            "passWithNoTests": true
-          }
+        "util-ui-message": {
+            "projectType": "library",
+            "root": "libs/util/ui/message",
+            "sourceRoot": "libs/util/ui/message/src",
+            "prefix": "janaszek",
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/util/ui/message/src/**/*.ts",
+                            "libs/util/ui/message/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/util/ui/message"],
+                    "options": {
+                        "jestConfig": "libs/util/ui/message/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
         }
-      }
-    },
-    "task-infrastructure": {
-      "projectType": "library",
-      "root": "libs/task/infrastructure",
-      "sourceRoot": "libs/task/infrastructure/src",
-      "prefix": "janaszek",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/task/infrastructure/src/**/*.ts",
-              "libs/task/infrastructure/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/task/infrastructure"],
-          "options": {
-            "jestConfig": "libs/task/infrastructure/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
     }
-  }
 }
