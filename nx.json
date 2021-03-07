@@ -22,7 +22,6 @@
     "task-feature": { "tags": [] },
     "task-application": { "tags": [] },
     "task-domain": { "tags": [] },
-    "task-infrastructure": { "tags": [] },
-    "util-domain": { "tags": [] }
+    "task-infrastructure": { "tags": [] }
   }
 }

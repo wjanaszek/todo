@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { EntityState, EntityStore } from '@datorama/akita';
+import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
 import { TodoTask } from '@janaszek/task/domain';
 
 @Injectable()
-export class AkitaTodoTaskStore extends EntityStore<
-	EntityState<TodoTask>,
-	TodoTask
-> {}
+@StoreConfig({ name: 'todo-tasks' })
+export class AkitaTodoTaskStore extends EntityStore<EntityState<TodoTask>> {}

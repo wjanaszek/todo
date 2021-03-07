@@ -21,8 +21,7 @@
       "@janaszek/task/domain": ["libs/task/domain/src/index.ts"],
       "@janaszek/task/infrastructure": [
         "libs/task/infrastructure/src/index.ts"
-      ],
-      "@janaszek/util/domain": ["libs/util/domain/src/index.ts"]
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

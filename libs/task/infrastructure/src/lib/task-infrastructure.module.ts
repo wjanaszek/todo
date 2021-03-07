@@ -1,31 +1,39 @@
-import { ModuleWithProviders, NgModule, Provider, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TodoTaskQuery } from '@janaszek/task/domain';
+import { ModuleWithProviders, NgModule, Provider, Type } from '@angular/core';
+import { TodoTaskCommand, TodoTaskQuery, TodoTaskResource } from '@janaszek/task/domain';
+import { AkitaTodoTaskCommand } from './akita/akita-todo-task.command';
 import { AkitaTodoTaskQuery } from './akita/akita-todo-task.query';
-import { AkitaTodoTaskQueryEntity } from './akita/akita-todo-task.query-entity';
 import { AkitaTodoTaskStore } from './akita/akita-todo-task.store';
+import { LocalStorageTodoTaskResource } from './local-storage/local-storage-todo-task.resource';
 
-const providers: Array<Provider> = [
-  AkitaTodoTaskStore,
-  AkitaTodoTaskQueryEntity
-];
+const providers: Array<Provider> = [AkitaTodoTaskStore];
 
 @NgModule({
-	imports: [CommonModule]
+    imports: [CommonModule],
 })
 export class TaskInfrastructureModule {
-	static forRoot(
-		todoTaskQuery: Type<TodoTaskQuery> = AkitaTodoTaskQuery
-	): ModuleWithProviders<TaskInfrastructureModule> {
-		return {
-			ngModule: TaskInfrastructureModule,
-			providers: [
-        ...providers,
-				{
-					provide: TodoTaskQuery,
-					useClass: todoTaskQuery,
-				},
-			],
-		};
-	}
+    static withProviders(
+        todoTaskCommand: Type<TodoTaskCommand> = AkitaTodoTaskCommand,
+        todoTaskQuery: Type<TodoTaskQuery> = AkitaTodoTaskQuery,
+        todoTaskResource: Type<TodoTaskResource> = LocalStorageTodoTaskResource
+    ): ModuleWithProviders<TaskInfrastructureModule> {
+        return {
+            ngModule: TaskInfrastructureModule,
+            providers: [
+                ...providers,
+                {
+                    provide: TodoTaskCommand,
+                    useClass: todoTaskCommand,
+                },
+                {
+                    provide: TodoTaskQuery,
+                    useClass: todoTaskQuery,
+                },
+                {
+                    provide: TodoTaskResource,
+                    useClass: todoTaskResource,
+                },
+            ],
+        };
+    }
 }

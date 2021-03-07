@@ -1,20 +1,14 @@
-import { ID } from '@datorama/akita';
-import { TodoTask } from '@janaszek/task/domain';
-import { SelectAllOptions, SelectQueryEntity } from '@janaszek/util/domain';
+import { TodoTask, TodoTaskId, TodoTaskStatus } from '@janaszek/task/domain';
 import { Observable } from 'rxjs';
 
-export abstract class TodoTaskQuery implements SelectQueryEntity<TodoTask> {
-  abstract selectAll(options: Partial<SelectAllOptions>): Observable<Array<TodoTask>>;
+export abstract class TodoTaskQuery {
+	abstract selectAllTodoTasks(): Observable<Array<TodoTask>>;
 
-  abstract selectCount(): Observable<number>;
+	abstract selectCount(): Observable<number>;
 
-  abstract selectEntity(id: ID): Observable<TodoTask>;
+	abstract selectById(id: TodoTaskId): Observable<TodoTask>;
 
-  abstract selectFirst(): Observable<TodoTask>;
+	abstract selectLoading(): Observable<boolean>;
 
-  abstract selectLast(): Observable<TodoTask>;
-
-  abstract selectLoading(): Observable<boolean>;
-
-  abstract selectMany(ids: Array<ID>): Observable<Array<TodoTask>>;
+	abstract selectByStatus(status: TodoTaskStatus): Observable<Array<TodoTask>>;
 }

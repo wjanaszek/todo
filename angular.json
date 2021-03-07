@@ -267,31 +267,6 @@
           }
         }
       }
-    },
-    "util-domain": {
-      "projectType": "library",
-      "root": "libs/util/domain",
-      "sourceRoot": "libs/util/domain/src",
-      "prefix": "janaszek",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/util/domain/src/**/*.ts",
-              "libs/util/domain/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/util/domain"],
-          "options": {
-            "jestConfig": "libs/util/domain/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
     }
   }
 }
